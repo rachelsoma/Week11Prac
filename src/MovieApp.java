@@ -5,13 +5,15 @@
 
 import java.util.Scanner;
 import java.io.File;
-import java.io.FileNotFoundException;
+//import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
+//import java.io.PrintWriter;
 
 public class MovieApp {
 
   public static void main(String[] args) throws IOException {
+    
+    System.out.println("Running");
     // TODO Auto-generated method stub
     //define variables
     String fileName = "movieLibrary.txt";
@@ -19,12 +21,20 @@ public class MovieApp {
 
     Scanner kb = new Scanner(System.in);
     File inFile = new File(fileName);
+    String str;
+    String[] tokens;
 
     fileExists(inFile, fileName);
     Scanner inputFile = new Scanner(inFile);
     //read file
     while (inputFile.hasNextLine()) {
+      str = inputFile.nextLine();
+      tokens = str.split(",");
+      for (int i =0; i < tokens.length; i++){
+        System.out.print(tokens[i] + " ");
+      }
       countMovies++;
+      System.out.println(" ");
     }
 
     System.out.println(countMovies);
@@ -45,6 +55,7 @@ public class MovieApp {
       System.out.println("Please enter a new file location:"); // prompts for new input
       fileName = kb.next();
       inFile = new File(fileName); // replace filename with user input
+      kb.close();
     }
    
   }

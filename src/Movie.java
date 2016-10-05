@@ -46,6 +46,7 @@ public class Movie {
     this.setRating(rating);
   }
 
+
   /**
    * @return the movieID
    */
@@ -171,9 +172,4 @@ public class Movie {
   public void setRating(String rating) {
     this.rating = rating;
   }
-
-
-
-
-
 }
