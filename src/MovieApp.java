@@ -166,7 +166,7 @@ public class MovieApp {
   
   public static void printMovies(Movie[] arrayMovies, int countMovies){
     System.out.println("Calling printMovies");
-    for (int i = 0; i < countMovies; i++){
+    for (int i = 0; i < arrayMovies.length&&arrayMovies[i]!=null; i++){
     //print one object at a time
       String title = arrayMovies[i].getMovieTitle();
         System.out.println(title);
