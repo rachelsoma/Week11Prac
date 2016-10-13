@@ -30,14 +30,11 @@ public class MovieApp {
 
     Scanner kb = new Scanner(System.in);
     File inFile = new File(fileName);
-    
-
+    arrayMovies = readFile(inFile,countMovies,fileName);
 
 
     String[] mainMenuArray = {"Movies", "Playlists", "Save", "Exit Program"};
     returnMenu = displayMenu(mainMenuArray);
-
-    readFile(inFile, countMovies, fileName);
 
     switch (returnMenu) {
       case 1:
@@ -123,7 +120,7 @@ public class MovieApp {
     }
   }
   
-  public static void readFile(File inFile, int countMovies, String fileName) throws IOException{
+  public static Movie[] readFile(File inFile, int countMovies, String fileName) throws IOException{
     fileExists(inFile, fileName);
     Scanner inputFile = new Scanner(inFile);
     String str;
@@ -163,14 +160,16 @@ public class MovieApp {
       // System.out.println(" ");
     }
     inputFile.close();
+    
+    return arrayMovies;
   }
   
   public static void printMovies(Movie[] arrayMovies, int countMovies){
     System.out.println("Calling printMovies");
     for (int i = 0; i < countMovies; i++){
-    //print one object
-      
-        System.out.println(arrayMovies[i].getMovieTitle());
+    //print one object at a time
+      String title = arrayMovies[i].getMovieTitle();
+        System.out.println(title);
       
     }
   }
