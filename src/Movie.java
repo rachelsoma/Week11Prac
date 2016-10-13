@@ -1,4 +1,3 @@
-import java.util.Date;
 
 /**
  * Student ID: 18820821
@@ -18,22 +17,22 @@ public class Movie {
   private double duration;
   private String genre;
   private String classification;
-  private Date releaseDate;
+  private String releaseDate;
   private String rating;
   
   /**
-   * @param movieID
-   * @param movieTitle
-   * @param director
-   * @param writer
-   * @param duration
-   * @param genre
-   * @param classification
-   * @param releaseDate
-   * @param rating
+   * @param movieID - a unique numeric identifier for a movie
+   * @param movieTitle - the title/name of the movie
+   * @param director - the name of the director of the movie
+   * @param writer - the name of the writer of the movie
+   * @param duration - the duration of the movie in hours (eg an hour and a half hour / 90 minute movie would be 1.5hrs
+   * @param genre - the categorisation of the movie (eg Drama, Action, Comedy, Adventure, Family, etc)
+   * @param classification - cassification of the movie (eg G, PG, M, MA 15+, R) 
+   * @param date - when the movie was released.
+   * @param rating a numeric value between 0-5 inclusive. May be NULL if movie has not been rated
    */
   public Movie(int movieID, String movieTitle, String director, String writer, double duration,
-      String genre, String classification, Date releaseDate, String rating) {
+      String genre, String classification, String date, String rating) {
     super();
     this.setMovieID(movieID);
     this.setMovieTitle(movieTitle);
@@ -42,7 +41,7 @@ public class Movie {
     this.setDuration(duration);
     this.setGenre(genre);
     this.setClassification(classification);
-    this.setReleaseDate(releaseDate);
+    this.setReleaseDate(date);
     this.setRating(rating);
   }
 
@@ -148,15 +147,15 @@ public class Movie {
   /**
    * @return the releaseDate
    */
-  public Date getReleaseDate() {
+  public String getReleaseDate() {
     return releaseDate;
   }
 
   /**
-   * @param releaseDate the releaseDate to set
+   * @param date the releaseDate to set
    */
-  public void setReleaseDate(Date releaseDate) {
-    this.releaseDate = releaseDate;
+  public void setReleaseDate(String date) {
+    this.releaseDate = date;
   }
 
   /**
