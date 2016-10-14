@@ -25,12 +25,15 @@ public class MovieApp {
     
     int returnMenu;
     Movie[] arrayMovies = null;
-    String fileName = "movieLibrary.txt";
+    Movie[] arrayPlaylists = null;
+    String fileNameMovies = "movieLibrary.txt";
+    String fileNamePlaylists = "playlists.txt";
     int countMovies = 0;
 
     Scanner kb = new Scanner(System.in);
-    File inFile = new File(fileName);
-    arrayMovies = readFile(inFile,countMovies,fileName);
+    File inFile = new File(fileNameMovies);
+    arrayMovies = readFile(inFile,countMovies,fileNameMovies);
+    arrayPlaylists = readFile(inFile,fileNamePlaylists);
 
 
     String[] mainMenuArray = {"Movies", "Playlists", "Save", "Exit Program"};
@@ -53,6 +56,7 @@ public class MovieApp {
         displayMenu(playlistMenuArray);
         switch(returnMenu){
           case 1:
+            printPlaylists();
             
           case 2:
             
@@ -79,6 +83,16 @@ public class MovieApp {
     
     kb.close();
     System.out.println("Goodbye!");
+  }
+
+  private static void printPlaylists() {
+    // TODO Auto-generated method stub
+    System.out.println("Calling printMovies");
+    for (int i = 0; i < arrayPlaylists.length&&arrayPlaylists[i]!=null; i++){
+    //print one object at a time
+      String title = arrayPlaylists[i].getMovieTitle();
+        System.out.println(title);
+    
   }
 
   public static int displayMenu(String[] menuArray) {
