@@ -1,13 +1,10 @@
 /**
- * Student ID: 18820821 
- * Name: Rachel Hardie 
- * Campus: Kingswood 
- * Tutor Name: Jordan Collier 
- * Class Day: Thursday 
- * Class Time: 0900
+ * Student ID: 18820821 Name: Rachel Hardie Campus: Kingswood Tutor Name: Jordan Collier Class Day:
+ * Thursday Class Time: 0900
  */
 
 import java.util.Scanner;
+import java.util.StringTokenizer;
 import java.io.File;
 // import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,18 +19,19 @@ public class MovieApp {
   public static void main(String[] args) throws IOException {
     System.out.println("Running");
     /** Declare Vaiables */
-    
+
     int returnMenu;
     Movie[] arrayMovies = null;
-    Movie[] arrayPlaylists = null;
+    Playlist[] arrayPlaylists = null;
     String fileNameMovies = "movieLibrary.txt";
     String fileNamePlaylists = "playlists.txt";
     int countMovies = 0;
 
     Scanner kb = new Scanner(System.in);
-    File inFile = new File(fileNameMovies);
-    arrayMovies = readFile(inFile,countMovies,fileNameMovies);
-    arrayPlaylists = readFile(inFile,fileNamePlaylists);
+    File inMovies = new File(fileNameMovies);
+    File inPlaylists = new File(fileNamePlaylists);
+    arrayMovies = readMoviesFile(inMovies, fileNameMovies);
+    arrayPlaylists = readPlaylistsFile(inPlaylists, fileNamePlaylists);
 
 
     String[] mainMenuArray = {"Movies", "Playlists", "Save", "Exit Program"};
@@ -41,58 +39,61 @@ public class MovieApp {
 
     switch (returnMenu) {
       case 1:
-        String[] movieMenuArray =
-            {"Display movies", "Sort Movies", "Rate Movie", "Change Movie Genre"};
+        String[] movieMenuArray = {"Display movies", "Sort Movies", "Rate Movie",
+            "Change Movie Genre", "Return to main menu"};
         displayMenu(movieMenuArray);
-        switch (returnMenu){
-          case 1: 
-           System.out.println("****DISPLAY MOVIES****");
-            printMovies(arrayMovies, countMovies);
+        switch (returnMenu) {
+          case 1:
+            System.out.println("****Display Movies****");
+            printMovies(arrayMovies);
+            break;
+          case 2:
+            System.out.println("****Sort Movies****");
+            break;
+          case 3:
+            System.out.println("****Rate Movie****");
+            break;
+          case 4:
+            System.out.println("****Change movie genre****");
+          case 5:
+
+            displayMenu(mainMenuArray);
+            break;
         }
-        
+
       case 2:
         String[] playlistMenuArray =
             {"Display Playlists", "Create Playlists", "Add movie to playlist", "Exit submenu"};
         displayMenu(playlistMenuArray);
-        switch(returnMenu){
+        switch (returnMenu) {
           case 1:
-            printPlaylists();
-            
+            printPlaylists(arrayPlaylists);
+
           case 2:
-            
-            
+
+
           case 3:
-            
+
           case 4:
             displayMenu(mainMenuArray);
-          break;
+            break;
         }
         break;
       case 3:
         System.out.println("Saving...");
-        
+
         break;
       case 4:
         System.out.println("Exiting program");
         break;
 
     }
-    
+
     System.out.println("Total: " + countMovies); // print total movies
 
-    
+
     kb.close();
     System.out.println("Goodbye!");
-  }
-
-  private static void printPlaylists() {
-    // TODO Auto-generated method stub
-    System.out.println("Calling printMovies");
-    for (int i = 0; i < arrayPlaylists.length&&arrayPlaylists[i]!=null; i++){
-    //print one object at a time
-      String title = arrayPlaylists[i].getMovieTitle();
-        System.out.println(title);
-    
   }
 
   public static int displayMenu(String[] menuArray) {
@@ -133,16 +134,17 @@ public class MovieApp {
       kb.close();
     }
   }
-  
-  public static Movie[] readFile(File inFile, int countMovies, String fileName) throws IOException{
+
+  public static Movie[] readMoviesFile(File inFile, String fileName) throws IOException {
     fileExists(inFile, fileName);
     Scanner inputFile = new Scanner(inFile);
+    int countMovies = 0;
     String str;
     String[] tokens;
     // int[] array;
 
     Movie[] arrayMovies = new Movie[50];
- // Read each line, split, then print
+    // Read each line, split, then print
     while (inputFile.hasNextLine() && countMovies < arrayMovies.length) {
       str = inputFile.nextLine();
       tokens = str.split(",");
@@ -161,8 +163,10 @@ public class MovieApp {
       String inClassification = tokens[6];
       String inDate = tokens[7];
       String inRating;
-      if (tokens.length > 8) { /* greater than 8 because array starts from 0 and max 
-      tokens should be 9 */
+      if (tokens.length > 8) { /*
+                                * greater than 8 because array starts from 0 and max tokens should
+                                * be 9
+                                */
         inRating = tokens[8];
       } else {
         inRating = "";
@@ -174,17 +178,77 @@ public class MovieApp {
       // System.out.println(" ");
     }
     inputFile.close();
-    
+
     return arrayMovies;
   }
-  
-  public static void printMovies(Movie[] arrayMovies, int countMovies){
+
+  public static void printMovies(Movie[] arrayMovies) {
     System.out.println("Calling printMovies");
-    for (int i = 0; i < arrayMovies.length&&arrayMovies[i]!=null; i++){
-    //print one object at a time
-      String title = arrayMovies[i].getMovieTitle();
-        System.out.println(title);
+    for (int i = 0; i < arrayMovies.length && arrayMovies[i] != null; i++) {
+      System.out.printf("%s, %d, %s, %s, %s",
+          arrayMovies[i].getMovieTitle(),arrayMovies[i].getDuration(),arrayMovies[i].getGenre(),arrayMovies[i].getClassification(),arrayMovies[i].getRating());
+
+    }
+  }
+
+  public static Playlist[] readPlaylistsFile(File inPlaylistsFile, String fileName)
+      throws IOException {
+    fileExists(inPlaylistsFile, fileName);
+    Scanner inputFile = new Scanner(inPlaylistsFile);
+    int countPlaylists = 0;
+    String str;
+    
+    int playlistID; // : a unique numeric identifier for the playlist
+    String name; // : a name for the playlist
+    int length;// : the number of movies in the playlist
+    String movies = ""; // : a list of zero or more Movie IDs which make up this playlist
+    // int[] array;
+
+    Playlist[] arrayPlaylists = new Playlist[50];
+    // Read each line, split, then print
+    while (inputFile.hasNextLine() && countPlaylists < arrayPlaylists.length) {
+      str = inputFile.nextLine();
       
+//      int playlistID = Integer.parseInt(tokens[0]);// : a unique numeric identifier for the playlist
+//      String name = tokens[1];// : a name for the playlist
+//      int length = Integer.parseInt(tokens[2]);// : the number of movies in the playlist
+//      
+//      for (i=3; tokens.hasMoreTokens(); i++)
+//      movies =  tokens[i];
+//        //movies = tokens[3];
+//      
+    
+    // creating string tokenizer
+    StringTokenizer tokenizer = new StringTokenizer(str,",");
+   
+    playlistID = Integer.parseInt(tokenizer.nextToken());
+    name = tokenizer.nextToken();
+    length = Integer.parseInt(tokenizer.nextToken());
+    // checking tokens
+    if (tokenizer.hasMoreTokens()){
+    movies = tokenizer.nextToken();    
+    } else {
+      movies = "";
+    }
+      
+      // create movie object
+      arrayPlaylists[countPlaylists] = new Playlist(playlistID, name, length, movies );
+      countPlaylists++;// increment count
+      // System.out.println(" ");
+    }
+    inputFile.close();
+
+    return arrayPlaylists;
+  }
+
+  private static void printPlaylists(Playlist[] arrayPlaylists) {
+    // TODO Auto-generated method stub
+    System.out.println("Calling printPlaylists");
+    for (int i = 0; i < arrayPlaylists.length && arrayPlaylists[i] != null; i++) {
+      // print one object at a time
+      
+      System.out.printf("%i, %s, %i, %s ",
+          arrayPlaylists[i].getPlaylistID(),arrayPlaylists[i].getName(),arrayPlaylists[i].getLength(),arrayPlaylists[i].getMovies());
     }
   }
 }
