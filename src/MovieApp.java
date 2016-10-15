@@ -21,6 +21,8 @@ public class MovieApp {
     /** Declare Vaiables */
 
     int returnMenu;
+    int returnMovieMenu;
+    int returnPlaylistMenu;
     Movie[] arrayMovies = null;
     Playlist[] arrayPlaylists = null;
     String fileNameMovies = "movieLibrary.txt";
@@ -34,41 +36,51 @@ public class MovieApp {
     arrayPlaylists = readPlaylistsFile(inPlaylists, fileNamePlaylists);
 
 
-    String[] mainMenuArray = {"Movies", "Playlists", "Save", "Exit Program"};
+    String[] mainMenuArray = 
+      {"Movies", "Playlists", "Save", "Exit Program"};
     returnMenu = displayMenu(mainMenuArray);
+    
+    String[] movieMenuArray = 
+      {"Display movies", "Sort Movies", "Rate Movie","Change Movie Genre", "Return to main menu"};
+    returnMovieMenu = displayMenu(movieMenuArray);
+    
+    String[] playlistMenuArray =
+      {"Display Playlists", "Create Playlists", "Add movie to playlist", "Exit submenu"};
+    returnPlaylistMenu = displayMenu(playlistMenuArray);
+  
 
     switch (returnMenu) {
-      case 1:
-        String[] movieMenuArray = {"Display movies", "Sort Movies", "Rate Movie",
-            "Change Movie Genre", "Return to main menu"};
+      case 1: //
         displayMenu(movieMenuArray);
-        switch (returnMenu) {
+        switch (returnMovieMenu) {
           case 1:
             System.out.println("****Display Movies****");
             printMovies(arrayMovies);
+            displayMenu(movieMenuArray);
             break;
           case 2:
             System.out.println("****Sort Movies****");
+            
             break;
           case 3:
             System.out.println("****Rate Movie****");
+          
             break;
           case 4:
             System.out.println("****Change movie genre****");
+           
           case 5:
-
             displayMenu(mainMenuArray);
             break;
         }
 
       case 2:
-        String[] playlistMenuArray =
-            {"Display Playlists", "Create Playlists", "Add movie to playlist", "Exit submenu"};
         displayMenu(playlistMenuArray);
-        switch (returnMenu) {
+
+        switch (returnPlaylistMenu) {
           case 1:
             printPlaylists(arrayPlaylists);
-
+            break;
           case 2:
 
 
@@ -185,8 +197,9 @@ public class MovieApp {
   public static void printMovies(Movie[] arrayMovies) {
     System.out.println("Calling printMovies");
     for (int i = 0; i < arrayMovies.length && arrayMovies[i] != null; i++) {
-      System.out.printf("%s, %d, %s, %s, %s",
-          arrayMovies[i].getMovieTitle(),arrayMovies[i].getDuration(),arrayMovies[i].getGenre(),arrayMovies[i].getClassification(),arrayMovies[i].getRating());
+      System.out.printf("%s, %s, %s, %s, %s \n", arrayMovies[i].getMovieTitle(),
+          arrayMovies[i].getDuration(), arrayMovies[i].getGenre(),
+          arrayMovies[i].getClassification(), arrayMovies[i].getRating());
 
     }
   }
@@ -197,7 +210,7 @@ public class MovieApp {
     Scanner inputFile = new Scanner(inPlaylistsFile);
     int countPlaylists = 0;
     String str;
-    
+
     int playlistID; // : a unique numeric identifier for the playlist
     String name; // : a name for the playlist
     int length;// : the number of movies in the playlist
@@ -208,31 +221,32 @@ public class MovieApp {
     // Read each line, split, then print
     while (inputFile.hasNextLine() && countPlaylists < arrayPlaylists.length) {
       str = inputFile.nextLine();
-      
-//      int playlistID = Integer.parseInt(tokens[0]);// : a unique numeric identifier for the playlist
-//      String name = tokens[1];// : a name for the playlist
-//      int length = Integer.parseInt(tokens[2]);// : the number of movies in the playlist
-//      
-//      for (i=3; tokens.hasMoreTokens(); i++)
-//      movies =  tokens[i];
-//        //movies = tokens[3];
-//      
-    
-    // creating string tokenizer
-    StringTokenizer tokenizer = new StringTokenizer(str,",");
-   
-    playlistID = Integer.parseInt(tokenizer.nextToken());
-    name = tokenizer.nextToken();
-    length = Integer.parseInt(tokenizer.nextToken());
-    // checking tokens
-    if (tokenizer.hasMoreTokens()){
-    movies = tokenizer.nextToken();    
-    } else {
-      movies = "";
-    }
-      
+
+      // int playlistID = Integer.parseInt(tokens[0]);// : a unique numeric identifier for the
+      // playlist
+      // String name = tokens[1];// : a name for the playlist
+      // int length = Integer.parseInt(tokens[2]);// : the number of movies in the playlist
+      //
+      // for (i=3; tokens.hasMoreTokens(); i++)
+      // movies = tokens[i];
+      // //movies = tokens[3];
+      //
+
+      // creating string tokenizer
+      StringTokenizer tokenizer = new StringTokenizer(str, ",");
+
+      playlistID = Integer.parseInt(tokenizer.nextToken());
+      name = tokenizer.nextToken();
+      length = Integer.parseInt(tokenizer.nextToken());
+      // checking tokens
+      if (tokenizer.hasMoreTokens()) {
+        movies = tokenizer.nextToken();
+      } else {
+        movies = "";
+      }
+
       // create movie object
-      arrayPlaylists[countPlaylists] = new Playlist(playlistID, name, length, movies );
+      arrayPlaylists[countPlaylists] = new Playlist(playlistID, name, length, movies);
       countPlaylists++;// increment count
       // System.out.println(" ");
     }
@@ -246,9 +260,10 @@ public class MovieApp {
     System.out.println("Calling printPlaylists");
     for (int i = 0; i < arrayPlaylists.length && arrayPlaylists[i] != null; i++) {
       // print one object at a time
-      
-      System.out.printf("%i, %s, %i, %s ",
-          arrayPlaylists[i].getPlaylistID(),arrayPlaylists[i].getName(),arrayPlaylists[i].getLength(),arrayPlaylists[i].getMovies());
+
+      System.out.printf("%i, %s, %i, %s ", arrayPlaylists[i].getPlaylistID(),
+          arrayPlaylists[i].getName(), arrayPlaylists[i].getLength(),
+          arrayPlaylists[i].getMovies());
     }
   }
 }
