@@ -36,60 +36,53 @@ public class MovieApp {
     arrayPlaylists = readPlaylistsFile(inPlaylists, fileNamePlaylists);
 
 
-    String[] mainMenuArray = 
-      {"Movies", "Playlists", "Save", "Exit Program"};
+    String[] mainMenuArray = {"Movies", "Playlists", "Save", "Exit Program"};
     returnMenu = displayMenu(mainMenuArray);
-    
-    String[] movieMenuArray = 
-      {"Display movies", "Sort Movies", "Rate Movie","Change Movie Genre", "Return to main menu"};
-    returnMovieMenu = displayMenu(movieMenuArray);
-    
-    String[] playlistMenuArray =
-      {"Display Playlists", "Create Playlists", "Add movie to playlist", "Exit submenu"};
-    returnPlaylistMenu = displayMenu(playlistMenuArray);
-  
-
     switch (returnMenu) {
-      case 1: 
+      case 1: // Movie menu
+        String[] movieMenuArray = {"Display movies", "Sort Movies", "Rate Movie", "Change Movie Genre",
+        "Return to main menu"};
+    returnMovieMenu = displayMenu(movieMenuArray);
+
+
         displayMenu(movieMenuArray);
-        
-        //Movie menu
-        switch (returnMovieMenu) {
-          case 1:
-            System.out.println("****Display Movies****");
-            printMovies(arrayMovies);
-            displayMenu(movieMenuArray);
-            break;
-          case 2:
-            System.out.println("****Sort Movies****");
-            
-            break;
-          case 3:
-            System.out.println("****Rate Movie****");
-          
-            break;
-          case 4:
-            System.out.println("****Change movie genre****");
-           
-          case 5:
-            displayMenu(mainMenuArray);
-            break;
+
+        if (returnMovieMenu == 1) {
+
+          System.out.println("****Display Movies****");
+          printMovies(arrayMovies);
+        }
+        if (returnMovieMenu == 2) {
+          System.out.println("****Sort Movies****");
+        }
+        if (returnMovieMenu == 3) {
+          System.out.println("****Rate Movie****");
+        }
+        if (returnMovieMenu == 4) {
+          System.out.println("****Change movie genre****");
+        }
+        if (returnMovieMenu == 5) {
+          displayMenu(mainMenuArray);
+        }
+        break;
+
+      case 2: // playlist menu
+        String[] playlistMenuArray =
+      {"Display Playlists", "Create Playlists", "Add movie to playlist", "Exit submenu"};
+  returnPlaylistMenu = displayMenu(playlistMenuArray);
+        displayMenu(playlistMenuArray);
+
+        if (returnPlaylistMenu == 1) {
+
+          printPlaylists(arrayPlaylists);
+        }
+        if (returnPlaylistMenu == 2) {
         }
 
-      case 2:
-        displayMenu(playlistMenuArray);
-        // playlist menu
-        switch (returnPlaylistMenu) {
-          case 1:
-            printPlaylists(arrayPlaylists);
-            break;
-          case 2:
-
-          case 3:
-
-          case 4:
-            displayMenu(mainMenuArray);
-            break;
+        if (returnPlaylistMenu == 3) {
+        }
+        if (returnPlaylistMenu == 4) {
+          displayMenu(mainMenuArray);
         }
         break;
       case 3:
@@ -99,7 +92,8 @@ public class MovieApp {
       case 4:
         System.out.println("Exiting program");
         break;
-
+      default:
+        break;
     }
 
     System.out.println("Total: " + countMovies); // print total movies
@@ -107,6 +101,11 @@ public class MovieApp {
 
     kb.close();
     System.out.println("Goodbye!");
+  }
+
+  public static void menu() {
+
+
   }
 
   public static int displayMenu(String[] menuArray) {
