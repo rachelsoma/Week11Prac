@@ -50,8 +50,10 @@ public class MovieApp {
   
 
     switch (returnMenu) {
-      case 1: //
+      case 1: 
         displayMenu(movieMenuArray);
+        
+        //Movie menu
         switch (returnMovieMenu) {
           case 1:
             System.out.println("****Display Movies****");
@@ -76,13 +78,12 @@ public class MovieApp {
 
       case 2:
         displayMenu(playlistMenuArray);
-
+        // playlist menu
         switch (returnPlaylistMenu) {
           case 1:
             printPlaylists(arrayPlaylists);
             break;
           case 2:
-
 
           case 3:
 
