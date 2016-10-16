@@ -1,11 +1,15 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Student ID: 18820821 Name: Rachel Hardie Campus: Kingswood Tutor Name: Jordan Collier Class Day:
  * Thursday Class Time: 0900
  */
 
-public class Movie implements Comparable<Movie> {
+public class Movie {//implements Comparable<Movie> {
 
+  static Scanner kb = new Scanner(System.in);
   private int movieID;
   private String movieTitle;
   private String director;
@@ -15,6 +19,7 @@ public class Movie implements Comparable<Movie> {
   private String classification;
   private String releaseDate;
   private String rating;
+  static Movie[] arrayMovies = null;
 
   /**
    * @param movieID - a unique numeric identifier for a movie
@@ -42,7 +47,7 @@ public class Movie implements Comparable<Movie> {
     this.setReleaseDate(date);
     this.setRating(rating);
   }
-
+  
 
   /**
    * @return the movieID
@@ -169,14 +174,147 @@ public class Movie implements Comparable<Movie> {
   public void setRating(String rating) {
     this.rating = rating;
   }
+  
+  public static Movie[] readFile(File inFile, String fileName) throws IOException {
+    MovieApp.fileExists(inFile, fileName);
+    Scanner inputFile = new Scanner(inFile);
+    int countMovies = 0;
+    String str;
+    String[] tokens;
+    // int[] array;
 
+    Movie[] arrayMovies = new Movie[50];
+    // Read each line, split, then print
+    while (inputFile.hasNextLine() && countMovies < arrayMovies.length) {
+      str = inputFile.nextLine();
+      tokens = str.split(",");
+
+      // parsing int/double inspiration from
+      // http://stackoverflow.com/questions/8348591/splitting-string-and-put-it-on-int-array
+      int inID = Integer.parseInt(tokens[0]);
+      String inTitle = tokens[1];
+      String inDirector = tokens[2];
+      String inWriter = tokens[3];
+      Double inDuration = Double.parseDouble(tokens[4]);
+      String inGenre = tokens[5];
+      String inClassification = tokens[6];
+      String inDate = tokens[7];
+      String inRating;
+      if (tokens.length > 8) { /*
+                                * greater than 8 because array starts from 0 and max tokens should
+                                * be 9
+                                */
+        inRating = tokens[8];
+      } else {
+        inRating = "";
+      }
+      // create movie object
+      arrayMovies[countMovies] = new Movie(inID, inTitle, inDirector, inWriter, inDuration, inGenre,
+          inClassification, inDate, inRating);
+      countMovies++;// increment count
+      // System.out.println(" ");
+    }
+    inputFile.close();
+
+    return arrayMovies;
+  }
+
+  public static void print(Movie[] arrayMovies) {
+    System.out.println("Calling printMovies");
+    for (int i = 0; i < arrayMovies.length && arrayMovies[i] != null; i++) {
+      System.out.printf("%s, %s, %s, %s, %s \n", arrayMovies[i].getMovieTitle(),
+          arrayMovies[i].getDuration(), arrayMovies[i].getGenre(),
+          arrayMovies[i].getClassification(), arrayMovies[i].getRating());
+
+    }
+  }
+  
+  public static void sortName(Movie[] arr) {
+    int startAt; // index of starting position
+    int j; // loop control
+    int minIndex; // index of smallest element
+    Movie tempObj; // temp object for swapping
+    for (startAt = 0; startAt < arr.length - 1; startAt++) {
+      minIndex = startAt; // assume smallest is at the start of arr
+      tempObj = arr[startAt];
+      if (arr[startAt] != null) {
+        // look through the rest of the array for value smaller than starting value
+
+        for (j = startAt + 1; j < arr.length && arr[j] != null; j++) {
+          if (arr[j].getMovieTitle().compareTo(tempObj.getMovieTitle()) < 0) { // compare current
+                                                                               // element with
+                                                                               // tempObj
+            tempObj = arr[j]; // set temp to be the new smallest value
+            minIndex = j; // record where that smallest value is located
+          }
+        }
+        arr[minIndex] = arr[startAt]; // perform the swap
+        arr[startAt] = tempObj; // complete the swap
+      }
+    }
+    print(arr);
+  }
+  
+  public static void sortGenre(Movie[] arr) {
+    int startAt; // index of starting position
+    int j; // loop control
+    int minIndex; // index of smallest element
+    Movie tempObj; // temp object for swapping
+    for (startAt = 0; startAt < arr.length - 1; startAt++) {
+      minIndex = startAt; // assume smallest is at the start of arr
+      tempObj = arr[startAt];
+      if (arr[startAt] != null) {
+        // look through the rest of the array for value smaller than starting value
+
+        for (j = startAt + 1; j < arr.length && arr[j] != null; j++) {
+          if (arr[j].getGenre().compareTo(tempObj.getGenre()) < 0) { // compare current
+                                                                     // element with
+                                                                     // tempObj
+            tempObj = arr[j]; // set temp to be the new smallest value
+            minIndex = j; // record where that smallest value is located
+          }
+        }
+        arr[minIndex] = arr[startAt]; // perform the swap
+        arr[startAt] = tempObj; // complete the swap
+      }
+    }
+    print(arr);
+  }
+
+  public static int search(Movie[] array, String lookingFor) {
+    int i = 0;
+    int foundAt = -1;
+    boolean found = false;
+    while (!found && i < array.length) {
+      if (array[i].getMovieTitle().contains(lookingFor)) {
+        found = true;
+        foundAt = i;
+      }
+      i++;
+    }
+    return foundAt;
+  }
+
+
+  public static void changeGenre() {
+    // TODO Auto-generated method stub
+    System.out.println("****Change movie genre****");
+    // get user input for movie name and search
+    System.out.println("Enter a title to search for: ");
+    String lookingFor = kb.nextLine();
+
+
+    int foundAt = Movie.search(arrayMovies, lookingFor);
+    System.out.println(
+        arrayMovies[foundAt].getMovieTitle() + " " + arrayMovies[foundAt].getGenre());
+    // choose genre
+
+    int returnGenre = Menu.displayMenu(Menu.genreArray);
+    arrayMovies[foundAt].setGenre(Menu.genreArray[returnGenre - 1]);
+    System.out.println(
+        arrayMovies[foundAt].getMovieTitle() + " " + arrayMovies[foundAt].getGenre());
+  }
 
   
-
-
-  @Override
-  public int compareTo(Movie o) {
-    // TODO Auto-generated method stub
-    return 0;
-  }
+  //*END OF CLASS Movie *//
 }
