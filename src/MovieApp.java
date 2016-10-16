@@ -58,8 +58,9 @@ public class MovieApp {
         }
         if (returnMovieMenu == 2) {
           System.out.println("****Sort Movies****");
-
+          selectionSort(arrayMovies);
           printMovies(arrayMovies);
+
           returnMovieMenu = displayMenu(movieMenuArray);
         }
         if (returnMovieMenu == 3) {
@@ -280,6 +281,29 @@ public class MovieApp {
       System.out.printf("%s, %s, %s, %s \n", arrayPlaylists[i].getPlaylistID(),
           arrayPlaylists[i].getName(), arrayPlaylists[i].getLength(),
           arrayPlaylists[i].getMovies());
+    }
+  }
+  
+  public static void selectionSort(Movie[] arr) {
+    int startAt; // index of starting position
+    int j; // loop control
+    int minIndex; // index of smallest element
+    Movie tempObj;
+    String temp; // temporary var for swapping elements
+    for (startAt = 0; startAt < arr.length - 1; startAt++) {
+      minIndex = startAt; // assume smallest is at the start of arr
+      temp = arr[startAt].getMovieTitle(); // keep the start value safe
+      tempObj = arr[startAt];
+      // look through the rest of the array for value smaller than starting value
+      for (j = startAt + 1; j < arr.length; j++) {
+        if (arr[j].getMovieTitle().compareTo(arr[startAt].getMovieTitle()) < 0) { // compare current element with temp
+                                                          // variable
+          temp = arr[j].getMovieTitle(); // set temp to be the new smallest value
+          minIndex = j; // record where that smallest value is located
+        }
+      }
+      arr[minIndex] = arr[startAt]; // perform the swap
+      arr[startAt] = tempObj; // complete the swap
     }
   }
 }

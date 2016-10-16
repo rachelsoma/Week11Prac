@@ -1,15 +1,11 @@
 
 /**
- * Student ID: 18820821
- * Name: Rachel Hardie
- * Campus: Kingswood
- * Tutor Name: Jordan Collier
- * Class Day: Thursday
- * Class Time: 0900
+ * Student ID: 18820821 Name: Rachel Hardie Campus: Kingswood Tutor Name: Jordan Collier Class Day:
+ * Thursday Class Time: 0900
  */
 
-public class Movie {
-  
+public class Movie implements Comparable<Movie> {
+
   private int movieID;
   private String movieTitle;
   private String director;
@@ -19,15 +15,17 @@ public class Movie {
   private String classification;
   private String releaseDate;
   private String rating;
-  
+
   /**
    * @param movieID - a unique numeric identifier for a movie
    * @param movieTitle - the title/name of the movie
    * @param director - the name of the director of the movie
    * @param writer - the name of the writer of the movie
-   * @param duration - the duration of the movie in hours (eg an hour and a half hour / 90 minute movie would be 1.5hrs
-   * @param genre - the categorisation of the movie (eg Drama, Action, Comedy, Adventure, Family, etc)
-   * @param classification - cassification of the movie (eg G, PG, M, MA 15+, R) 
+   * @param duration - the duration of the movie in hours (eg an hour and a half hour / 90 minute
+   *        movie would be 1.5hrs
+   * @param genre - the categorisation of the movie (eg Drama, Action, Comedy, Adventure, Family,
+   *        etc)
+   * @param classification - cassification of the movie (eg G, PG, M, MA 15+, R)
    * @param date - when the movie was released.
    * @param rating a numeric value between 0-5 inclusive. May be NULL if movie has not been rated
    */
@@ -170,5 +168,15 @@ public class Movie {
    */
   public void setRating(String rating) {
     this.rating = rating;
+  }
+
+
+  
+
+
+  @Override
+  public int compareTo(Movie o) {
+    // TODO Auto-generated method stub
+    return 0;
   }
 }
