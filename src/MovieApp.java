@@ -283,27 +283,28 @@ public class MovieApp {
           arrayPlaylists[i].getMovies());
     }
   }
-  
+
   public static void selectionSort(Movie[] arr) {
     int startAt; // index of starting position
     int j; // loop control
     int minIndex; // index of smallest element
-    Movie tempObj;
-    String temp; // temporary var for swapping elements
+    Movie tempObj; // temp object for swapping
     for (startAt = 0; startAt < arr.length - 1; startAt++) {
-      minIndex = startAt; // assume smallest is at the start of arr
-      temp = arr[startAt].getMovieTitle(); // keep the start value safe
-      tempObj = arr[startAt];
-      // look through the rest of the array for value smaller than starting value
-      for (j = startAt + 1; j < arr.length; j++) {
-        if (arr[j].getMovieTitle().compareTo(arr[startAt].getMovieTitle()) < 0) { // compare current element with temp
-                                                          // variable
-          temp = arr[j].getMovieTitle(); // set temp to be the new smallest value
-          minIndex = j; // record where that smallest value is located
+        minIndex = startAt; // assume smallest is at the start of arr
+        tempObj = arr[startAt];
+        if (arr[startAt] != null) {
+        // look through the rest of the array for value smaller than starting value
+           
+        for (j = startAt + 1; j < arr.length  && arr[j] != null; j++) {
+          if (arr[j].getMovieTitle().compareTo(tempObj.getMovieTitle()) < 0) { // compare current
+                                                                               // element with
+                                                                               // tempObj
+            minIndex = j; // record where that smallest value is located
+          }
         }
-      }
-      arr[minIndex] = arr[startAt]; // perform the swap
-      arr[startAt] = tempObj; // complete the swap
+        arr[minIndex] = arr[startAt]; // perform the swap
+        arr[startAt] = tempObj; // complete the swap
+        }
     }
   }
 }
