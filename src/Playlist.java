@@ -11,10 +11,10 @@ public class Playlist {
   private int playlistID;// a unique numeric identifier for the playlist
   private String name;// a name for the playlist
   private int length;// the number of movies in the playlist
-  private String movies;// a list of zero or more Movie IDs which make up this playlist
+  private StringBuilder movies;// a list of zero or more Movie IDs which make up this playlist
 
 
-  public Playlist(int playlistID, String name, int length, String movies) {
+  public Playlist(int playlistID, String name, int length, StringBuilder movies) {
     this.playlistID = playlistID;
     this.name = name;
     this.length = length;
@@ -67,14 +67,14 @@ public class Playlist {
   /**
    * @return the movies
    */
-  public String getMovies() {
+  public StringBuilder getMovies() {
     return movies;
   }
 
   /**
    * @param movies the movies to set
    */
-  public void setMovies(String movies) {
+  public void setMovies(StringBuilder movies) {
     this.movies = movies;
   }
 }

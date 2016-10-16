@@ -3,6 +3,7 @@
  * Thursday Class Time: 0900
  */
 
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.io.File;
@@ -38,39 +39,50 @@ public class MovieApp {
 
     String[] mainMenuArray = {"Movies", "Playlists", "Save", "Exit Program"};
     returnMenu = displayMenu(mainMenuArray);
+    System.out.println("You selected: " + returnMenu);
+
     switch (returnMenu) {
       case 1: // Movie menu
-        String[] movieMenuArray = {"Display movies", "Sort Movies", "Rate Movie", "Change Movie Genre",
-        "Return to main menu"};
-    returnMovieMenu = displayMenu(movieMenuArray);
+        String[] movieMenuArray = {"Display movies", "Sort Movies", "Rate Movie",
+            "Change Movie Genre", "Return to main menu"};
 
+        returnMovieMenu = displayMenu(movieMenuArray);
 
-        displayMenu(movieMenuArray);
 
         if (returnMovieMenu == 1) {
 
           System.out.println("****Display Movies****");
           printMovies(arrayMovies);
+
+          returnMovieMenu = displayMenu(movieMenuArray);
         }
         if (returnMovieMenu == 2) {
           System.out.println("****Sort Movies****");
+
+          printMovies(arrayMovies);
+          returnMovieMenu = displayMenu(movieMenuArray);
         }
         if (returnMovieMenu == 3) {
           System.out.println("****Rate Movie****");
+
+          returnMovieMenu = displayMenu(movieMenuArray);
         }
         if (returnMovieMenu == 4) {
           System.out.println("****Change movie genre****");
+
+          returnMovieMenu = displayMenu(movieMenuArray);
         }
         if (returnMovieMenu == 5) {
-          displayMenu(mainMenuArray);
+
+          returnMenu = displayMenu(mainMenuArray);
         }
         break;
 
       case 2: // playlist menu
         String[] playlistMenuArray =
-      {"Display Playlists", "Create Playlists", "Add movie to playlist", "Exit submenu"};
-  returnPlaylistMenu = displayMenu(playlistMenuArray);
-        displayMenu(playlistMenuArray);
+            {"Display Playlists", "Create Playlists", "Add movie to playlist", "Exit submenu"};
+        returnPlaylistMenu = displayMenu(playlistMenuArray);
+        // displayMenu(playlistMenuArray);
 
         if (returnPlaylistMenu == 1) {
 
@@ -214,7 +226,7 @@ public class MovieApp {
     int playlistID; // : a unique numeric identifier for the playlist
     String name; // : a name for the playlist
     int length;// : the number of movies in the playlist
-    String movies = ""; // : a list of zero or more Movie IDs which make up this playlist
+    // StringBuilder movies; // : a list of zero or more Movie IDs which make up this playlist
     // int[] array;
 
     Playlist[] arrayPlaylists = new Playlist[50];
@@ -239,11 +251,15 @@ public class MovieApp {
       name = tokenizer.nextToken();
       length = Integer.parseInt(tokenizer.nextToken());
       // checking tokens
-      if (tokenizer.hasMoreTokens()) {
-        movies = tokenizer.nextToken();
-      } else {
-        movies = "";
+      StringBuilder movies = new StringBuilder();
+      while (tokenizer.hasMoreTokens()) {
+        String next = tokenizer.nextToken();
+        movies.append(next);
+        movies.append(",");
       }
+      movies.append("");
+      /** remove trailing comma if time permots **/
+      // movies.deleteCharAt(movies.lastIndexOf(","));
 
       // create movie object
       arrayPlaylists[countPlaylists] = new Playlist(playlistID, name, length, movies);
@@ -261,7 +277,7 @@ public class MovieApp {
     for (int i = 0; i < arrayPlaylists.length && arrayPlaylists[i] != null; i++) {
       // print one object at a time
 
-      System.out.printf("%i, %s, %i, %s ", arrayPlaylists[i].getPlaylistID(),
+      System.out.printf("%s, %s, %s, %s \n", arrayPlaylists[i].getPlaylistID(),
           arrayPlaylists[i].getName(), arrayPlaylists[i].getLength(),
           arrayPlaylists[i].getMovies());
     }
