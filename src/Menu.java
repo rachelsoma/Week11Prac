@@ -10,26 +10,31 @@ import java.util.Scanner;
  */
 
 public class Menu {
+  
+  static Scanner kb = new Scanner(System.in);
   public static int returnMenu; // selected menu item
   public static int returnMovieMenu; // selected movie menu item
   public static int returnPlaylistMenu; // selected playlist menu item
   public static int returnSortMenu; // selected sort menu item
   
-  static Scanner kb = new Scanner(System.in);
-  
 //instantiate all menus
-  public static String[] mainMenuArray = {"Movies", "Playlists", "Save", "Exit Program"};
+  public static String[] mainMenuArray = {"Movies", "Playlists", "Save", "Exit Program"}; //main menu items
   public static String[] movieMenuArray =
-      {"Display movies", "Sort Movies", "Rate Movie", "Change Movie Genre", "Exit sub-menu"};
-  public static String[] sortMenuArray = {"Sort by Name", "Sort by Genre", "Exit sub-menu"};
+      {"Display movies", "Sort Movies", "Rate Movie", "Change Movie Genre", "Exit sub-menu"}; //movie sub-menu items
+  public static String[] sortMenuArray = {"Sort by Name", "Sort by Genre", "Exit sub-menu"}; // sort sub-sub-menu
   public static String[] genreArray = {"Action", "Adventure", "Comedy", "Fantasy", "Family", "Romance",
-      "Horror", "Drama", "Sci-fi", "Thriller"};
+      "Horror", "Drama", "Sci-fi", "Thriller"}; // genre sub-sub-menu
   public static String[] playlistMenuArray =
-      {"Display Playlists", "Create Playlists", "Add movie to playlist", "Exit submenu"};
+      {"Display Playlists", "Create Playlists", "Add movie to playlist", "Exit submenu"}; //playlist menu
 
   
+  /**
+   * Method to display formatted menu
+   * @param menuArray - array generated from
+   * @return min menu value and max menu value
+   */
   public static int displayMenu(String[] menuArray) {
-
+//
     final int min = 1;
     final int max = menuArray.length;
     // int input;
@@ -42,8 +47,13 @@ public class Menu {
 
   }
 
+  /**
+   * tests the user input to make sure it's within the range of the menu
+   * @param min - minimum value in menu, the first option
+   * @param max - the maximum value in menu, the last option on the menu
+   * @return input - the users input
+   */
   public static int getMenuChoice(int min, int max) {
-
     int input;
     do {
       input = kb.nextInt();
@@ -54,8 +64,11 @@ public class Menu {
     return input;
   }
 
+  /**
+   * 
+   */
   public static void showMenu() {
-    // TODO Auto-generated method stub
+    // Method to display and run menus
     returnMenu = Menu.displayMenu(mainMenuArray);
     switch (returnMenu) {
       case 1: // Movie menu
@@ -124,8 +137,4 @@ public class Menu {
     }
 
   }
-
-  
-
-
 }

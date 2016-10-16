@@ -1,16 +1,18 @@
+/**
+ * Student ID: 18820821 
+ * Name: Rachel Hardie 
+ * Campus: Kingswood 
+ * Tutor Name: Jordan Collier 
+ * Class Day: Thursday 
+ * Class Time: 0900
+ */
+
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-/**
- * Student ID: 18820821 Name: Rachel Hardie Campus: Kingswood Tutor Name: Jordan Collier Class Day:
- * Thursday Class Time: 0900
- */
-
-/**
- *
- */
 public class Playlist {
 
   private int playlistID;// a unique numeric identifier for the playlist
@@ -85,6 +87,12 @@ public class Playlist {
     this.movies = movies;
   }
   
+  /**
+   * @param inPlaylistsFile
+   * @param fileName
+   * @return arrayPlaylists
+   * @throws IOException
+   */
   public static Playlist[] readFile(File inPlaylistsFile, String fileName)
       throws IOException {
     MovieApp.fileExists(inPlaylistsFile, fileName);
@@ -131,6 +139,11 @@ public class Playlist {
   }
 
 
+  /**
+   * @param array - the array to search
+   * @param lookingFor - the search term to find
+   * @return foundAt - the position in the array the search term was located
+   */
   public static int search(Playlist[] array, String lookingFor) {
     int i = 0;
     int foundAt = -1;
@@ -145,17 +158,31 @@ public class Playlist {
     return foundAt;
   }
 
+  /**
+   * @param arr - the array to alter
+   */
   public static void addMovie(Playlist[] arr) {
+    String lookingFor;
+    String addToPlaylist;
+    int foundAt;
+    StringBuilder playlist;
+    int tempLength;
     System.out.println("Choose a playlist to add movie to: ");
-    String lookingFor = kb.nextLine();
-    int foundAt = search(arr, lookingFor);
+    lookingFor = kb.nextLine();
+    foundAt = search(arr, lookingFor);
     System.out.println("Choose a movie to add to playlist: ");
-    String addToPlaylist = kb.next();
-    StringBuilder playlist = new StringBuilder(search(arr, lookingFor));
+    addToPlaylist = kb.next();
+    playlist = new StringBuilder(search(arr, lookingFor));
     playlist.append(addToPlaylist);
     arr[foundAt].setMovies(playlist);
+    tempLength = arr[foundAt].getLength();
+    arr[foundAt].setLength(tempLength+1);
   }
   
+  /**
+   * prints formatted array to console
+   * @param arrayPlaylists
+   */
   public static void print(Playlist[] arrayPlaylists) {
     // TODO Auto-generated method stub
     System.out.println("Calling printPlaylists");

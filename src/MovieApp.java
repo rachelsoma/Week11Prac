@@ -1,6 +1,10 @@
 /**
- * Student ID: 18820821 Name: Rachel Hardie Campus: Kingswood Tutor Name: Jordan Collier Class Day:
- * Thursday Class Time: 0900
+ * Student ID: 18820821 
+ * Name: Rachel Hardie 
+ * Campus: Kingswood 
+ * Tutor Name: Jordan Collier 
+ * Class Day: Thursday 
+ * Class Time: 0900
  */
 
 
@@ -11,7 +15,6 @@ import java.io.IOException;
 
 public class MovieApp {
   static Scanner kb = new Scanner(System.in);
-
   public static void main(String[] args) throws IOException {
     System.out.println("Running");
     /** Declare Vaiables */
@@ -19,7 +22,7 @@ public class MovieApp {
     String fileNamePlaylists = "playlists.txt";
     int countMovies = 0;
 
-    Scanner kb = new Scanner(System.in);
+    
     File inMovies = new File(fileNameMovies);
     File inPlaylists = new File(fileNamePlaylists);
     Movie.arrayMovies = Movie.readFile(inMovies, fileNameMovies);

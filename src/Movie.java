@@ -3,11 +3,15 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Student ID: 18820821 Name: Rachel Hardie Campus: Kingswood Tutor Name: Jordan Collier Class Day:
- * Thursday Class Time: 0900
+ * Student ID: 18820821 
+ * Name: Rachel Hardie 
+ * Campus: Kingswood 
+ * Tutor Name: Jordan Collier 
+ * Class Day: Thursday 
+ * Class Time: 0900
  */
 
-public class Movie {//implements Comparable<Movie> {
+public class Movie {// implements Comparable<Movie> {
 
   static Scanner kb = new Scanner(System.in);
   private int movieID;
@@ -47,7 +51,7 @@ public class Movie {//implements Comparable<Movie> {
     this.setReleaseDate(date);
     this.setRating(rating);
   }
-  
+
 
   /**
    * @return the movieID
@@ -174,7 +178,7 @@ public class Movie {//implements Comparable<Movie> {
   public void setRating(String rating) {
     this.rating = rating;
   }
-  
+
   public static Movie[] readFile(File inFile, String fileName) throws IOException {
     MovieApp.fileExists(inFile, fileName);
     Scanner inputFile = new Scanner(inFile);
@@ -200,10 +204,8 @@ public class Movie {//implements Comparable<Movie> {
       String inClassification = tokens[6];
       String inDate = tokens[7];
       String inRating;
-      if (tokens.length > 8) { /*
-                                * greater than 8 because array starts from 0 and max tokens should
-                                * be 9
-                                */
+      // greater than 8 because array starts from 0 and max tokens should be 9
+      if (tokens.length > 8) {
         inRating = tokens[8];
       } else {
         inRating = "";
@@ -225,10 +227,9 @@ public class Movie {//implements Comparable<Movie> {
       System.out.printf("%s, %s, %s, %s, %s \n", arrayMovies[i].getMovieTitle(),
           arrayMovies[i].getDuration(), arrayMovies[i].getGenre(),
           arrayMovies[i].getClassification(), arrayMovies[i].getRating());
-
     }
   }
-  
+
   public static void sortName(Movie[] arr) {
     int startAt; // index of starting position
     int j; // loop control
@@ -239,11 +240,9 @@ public class Movie {//implements Comparable<Movie> {
       tempObj = arr[startAt];
       if (arr[startAt] != null) {
         // look through the rest of the array for value smaller than starting value
-
         for (j = startAt + 1; j < arr.length && arr[j] != null; j++) {
-          if (arr[j].getMovieTitle().compareTo(tempObj.getMovieTitle()) < 0) { // compare current
-                                                                               // element with
-                                                                               // tempObj
+          // compare current element with tempObj
+          if (arr[j].getMovieTitle().compareTo(tempObj.getMovieTitle()) < 0) {
             tempObj = arr[j]; // set temp to be the new smallest value
             minIndex = j; // record where that smallest value is located
           }
@@ -254,22 +253,18 @@ public class Movie {//implements Comparable<Movie> {
     }
     print(arr);
   }
-  
+
   public static void sortGenre(Movie[] arr) {
-    int startAt; // index of starting position
-    int j; // loop control
     int minIndex; // index of smallest element
     Movie tempObj; // temp object for swapping
-    for (startAt = 0; startAt < arr.length - 1; startAt++) {
+    for (int startAt = 0; startAt < arr.length - 1; startAt++) {
       minIndex = startAt; // assume smallest is at the start of arr
       tempObj = arr[startAt];
       if (arr[startAt] != null) {
         // look through the rest of the array for value smaller than starting value
-
-        for (j = startAt + 1; j < arr.length && arr[j] != null; j++) {
-          if (arr[j].getGenre().compareTo(tempObj.getGenre()) < 0) { // compare current
-                                                                     // element with
-                                                                     // tempObj
+        for (int j = startAt + 1; j < arr.length && arr[j] != null; j++) {
+          // compare current element with tempObj
+          if (arr[j].getGenre().compareTo(tempObj.getGenre()) < 0) {
             tempObj = arr[j]; // set temp to be the new smallest value
             minIndex = j; // record where that smallest value is located
           }
@@ -302,19 +297,16 @@ public class Movie {//implements Comparable<Movie> {
     // get user input for movie name and search
     System.out.println("Enter a title to search for: ");
     String lookingFor = kb.nextLine();
-
-
     int foundAt = Movie.search(arrayMovies, lookingFor);
-    System.out.println(
-        arrayMovies[foundAt].getMovieTitle() + " " + arrayMovies[foundAt].getGenre());
+    System.out
+        .println(arrayMovies[foundAt].getMovieTitle() + " " + arrayMovies[foundAt].getGenre());
     // choose genre
-
     int returnGenre = Menu.displayMenu(Menu.genreArray);
     arrayMovies[foundAt].setGenre(Menu.genreArray[returnGenre - 1]);
-    System.out.println(
-        arrayMovies[foundAt].getMovieTitle() + " " + arrayMovies[foundAt].getGenre());
+    System.out
+        .println(arrayMovies[foundAt].getMovieTitle() + " " + arrayMovies[foundAt].getGenre());
   }
 
-  
-  //*END OF CLASS Movie *//
+
+  // *END OF CLASS Movie *//
 }
