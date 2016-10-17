@@ -10,7 +10,8 @@ import java.util.Scanner;
  */
 
 public class Menu {
-  
+
+// CD - I would avoid making items static  
   static Scanner kb = new Scanner(System.in);
   public static int returnMenu; // selected menu item
   public static int returnMovieMenu; // selected movie menu item
@@ -67,6 +68,13 @@ public class Menu {
   /**
    * 
    */
+// CD - to make it easier to follow I would put each case into its own method
+// eg.
+// case 1:
+//      returnMovieMenu = Menu.displayMenu(movieMenuArray);
+//      returnMovieMenu = displayMovieMenu(returnMovieMenu);
+// case 2:
+//      etc.
   public static void showMenu() {
     // Method to display and run menus
     returnMenu = Menu.displayMenu(mainMenuArray);

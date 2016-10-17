@@ -11,6 +11,8 @@ import java.util.Scanner;
  * Class Time: 0900
  */
 
+// CD - Stylistically I would separate a Movie and the actions you can perfom on a Movie array
+// maybe create a MovieCollection class which can hold the array?
 public class Movie {// implements Comparable<Movie> {
 
   static Scanner kb = new Scanner(System.in);
@@ -180,6 +182,7 @@ public class Movie {// implements Comparable<Movie> {
   }
 
   public static Movie[] readFile(File inFile, String fileName) throws IOException {
+    // CD - if you want to redefine how File.exists() works then you should create your own class eg. MovieFile and override the exists() to log, retry, etc
     MovieApp.fileExists(inFile, fileName);
     Scanner inputFile = new Scanner(inFile);
     int countMovies = 0;
@@ -187,9 +190,11 @@ public class Movie {// implements Comparable<Movie> {
     String[] tokens;
     // int[] array;
 
+    // CD - if you change this to "List<Movie> movies", you dont need to pre-allocate array can just call movies.add(movie) 
     Movie[] arrayMovies = new Movie[50];
     // Read each line, split, then print
     while (inputFile.hasNextLine() && countMovies < arrayMovies.length) {
+      // CD - I would put everything in this while loop in a separate method to make it easier to read
       str = inputFile.nextLine();
       tokens = str.split(",");
 
@@ -230,6 +235,7 @@ public class Movie {// implements Comparable<Movie> {
     }
   }
 
+  // CD - these next two functions are identical, replace with one function which takes a sortBy parameter.
   public static void sortName(Movie[] arr) {
     int startAt; // index of starting position
     int j; // loop control
