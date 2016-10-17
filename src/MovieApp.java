@@ -7,7 +7,6 @@
  * Class Time: 0900
  */
 
-
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +20,6 @@ public class MovieApp {
     String fileNameMovies = "movieLibrary.txt";
     String fileNamePlaylists = "playlists.txt";
     int countMovies = 0;
-
     
     File inMovies = new File(fileNameMovies);
     File inPlaylists = new File(fileNamePlaylists);
@@ -31,7 +29,6 @@ public class MovieApp {
     Menu.showMenu();
 
     System.out.println("Total: " + countMovies); // print total movies
-
 
     kb.close();
     System.out.println("Goodbye!");
