@@ -92,14 +92,14 @@ public class Menu {
     // String lookingFor;
     switch (returnMovieMenu) {
       case 1:
-        System.out.println("****Display Movies****");
         Movie.print(Movie.arrayMovies);
         returnMovieMenu = Menu.displayMenu(movieMenuArray);
       case 2: // go to sort menu
         sortMenu();
+        returnMovieMenu = Menu.displayMenu(movieMenuArray);
       case 3: // go to rate movie function
-        System.out.println("****Rate Movie****");
-
+        Movie.rate();
+        returnMovieMenu = Menu.displayMenu(movieMenuArray);
       case 4: // go to change movie genre function
         Movie.changeGenre();
         returnMovieMenu = Menu.displayMenu(movieMenuArray);
@@ -116,7 +116,8 @@ public class Menu {
         Playlist.print(Playlist.arrayPlaylists);
 
       case 2: // create playlists
-
+        Playlist.newPlaylist();
+        Playlist.print(Playlist.arrayPlaylists);
       case 3: // add movie to playlist
         // select playlist
         Playlist.addMovie(Playlist.arrayPlaylists);
@@ -129,7 +130,7 @@ public class Menu {
     }
   }
 
-  public static int sortMenu() {
+  public static void sortMenu() {
     System.out.println("****Sort Movies****");
     returnSortMenu = Menu.displayMenu(sortMenuArray);
     switch (returnSortMenu) {
@@ -142,8 +143,6 @@ public class Menu {
       case 3: // exit sub-menu
         Menu.displayMenu(movieMenuArray);
         returnMovieMenu = Menu.displayMenu(movieMenuArray);
-        break;
     }
-    return returnMovieMenu;
   }
 }

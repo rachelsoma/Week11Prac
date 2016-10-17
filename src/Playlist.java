@@ -15,6 +15,7 @@ import java.util.StringTokenizer;
 
 public class Playlist {
 
+  private static int countPlaylists = 0;
   private int playlistID;// a unique numeric identifier for the playlist
   private String name;// a name for the playlist
   private int length;// the number of movies in the playlist
@@ -97,7 +98,6 @@ public class Playlist {
       throws IOException {
     MovieApp.fileExists(inPlaylistsFile, fileName);
     Scanner inputFile = new Scanner(inPlaylistsFile);
-    int countPlaylists = 0;
     String str;
 
     int playlistID; // : a unique numeric identifier for the playlist
@@ -193,6 +193,34 @@ public class Playlist {
           arrayPlaylists[i].getName(), arrayPlaylists[i].getLength(),
           arrayPlaylists[i].getMovies());
     }
+  }
+  
+  public static void newPlaylist(){
+      // creating string tokenizer
+      
+
+      int playlistID = arrayPlaylists.length+1;
+      System.out.println("Enter new playlist name");
+      String name = kb.nextLine();
+      int length = 0;
+      System.out.println("Enter movie IDs to add to playlist, seperated by commas");
+      String newMovies = kb.nextLine();
+      StringTokenizer tokenizer = new StringTokenizer(newMovies, ",");
+      
+      StringBuilder movies = new StringBuilder();
+      while (tokenizer.hasMoreTokens()) {
+        String next = tokenizer.nextToken();
+        movies.append(next);
+        movies.append(",");
+        length++;
+      }
+      movies.append("");
+    
+      arrayPlaylists[countPlaylists+1] = new Playlist(playlistID, name, length, movies); 
+      System.out.println(arrayPlaylists[countPlaylists+1]);
+      
+      countPlaylists++;
+      
   }
   
 }

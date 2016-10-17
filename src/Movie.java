@@ -11,9 +11,7 @@ import java.util.Scanner;
  * Class Time: 0900
  */
 
-// CD - Stylistically I would separate a Movie and the actions you can perfom on a Movie array
-// maybe create a MovieCollection class which can hold the array?
-public class Movie {// implements Comparable<Movie> {
+public class Movie {
 
   static Scanner kb = new Scanner(System.in);
   private int movieID;
@@ -312,7 +310,38 @@ public class Movie {// implements Comparable<Movie> {
     System.out
         .println(arrayMovies[foundAt].getMovieTitle() + " " + arrayMovies[foundAt].getGenre());
   }
+  public static void rate() {
+    // TODO Auto-generated method stub
+    System.out.println("****Change movie rating****");
+    // get user input for movie name and search
+    System.out.println("Enter a title to search for: ");
+    String lookingFor = kb.nextLine();
+    int foundAt = Movie.search(arrayMovies, lookingFor);
+    if(foundAt >=0){
+    System.out
+        .println(arrayMovies[foundAt].getMovieTitle() + " " + arrayMovies[foundAt].getRating());
+    // choose rate movie
+System.out.println("Enter your rating: ");
+    String newRating = kb.nextLine();
+    newRating = validateRating(newRating);
+    arrayMovies[foundAt].setRating(newRating);
+    System.out
+        .println(arrayMovies[foundAt].getMovieTitle() + " rated as " + arrayMovies[foundAt].getRating());
+    } else { System.out.println("No matches found");}
+  }
 
+
+  private static String validateRating(String inRating) {
+    // TODO Auto-generated method stub
+   
+    double rating = Double.parseDouble(inRating);
+    while (rating < 0 || rating > 5){
+      System.out.println("Enter your rating: ");
+      rating = kb.nextInt();
+    }
+    String newRating = Double.toString(rating);
+    return newRating;
+  }
 
   // *END OF CLASS Movie *//
 }
