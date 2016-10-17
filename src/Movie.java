@@ -3,12 +3,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Student ID: 18820821 
- * Name: Rachel Hardie 
- * Campus: Kingswood 
- * Tutor Name: Jordan Collier 
- * Class Day: Thursday 
- * Class Time: 0900
+ * Student ID: 18820821 Name: Rachel Hardie Campus: Kingswood Tutor Name: Jordan Collier Class Day:
+ * Thursday Class Time: 0900
  */
 
 public class Movie {// implements Comparable<Movie> {
@@ -280,7 +276,7 @@ public class Movie {// implements Comparable<Movie> {
     int i = 0;
     int foundAt = -1;
     boolean found = false;
-    while (!found && i < array.length) {
+    while (!found && i < array.length&&array[i]!=null) {
       if (array[i].getMovieTitle().contains(lookingFor)) {
         found = true;
         foundAt = i;
@@ -298,13 +294,49 @@ public class Movie {// implements Comparable<Movie> {
     System.out.println("Enter a title to search for: ");
     String lookingFor = kb.nextLine();
     int foundAt = Movie.search(arrayMovies, lookingFor);
+    
+    if (foundAt >=0) {
+      System.out
+          .println(arrayMovies[foundAt].getMovieTitle() + " " + arrayMovies[foundAt].getGenre());
+      // choose genre
+      int returnGenre = Menu.displayMenu(Menu.genreArray);
+      arrayMovies[foundAt].setGenre(Menu.genreArray[returnGenre - 1]);
+      System.out.println(
+          arrayMovies[foundAt].getMovieTitle() + " " + arrayMovies[foundAt].getGenre());
+    } else { System.out.println("No matches found");}
+  }
+
+  public static void rate() {
+    // TODO Auto-generated method stub
+    System.out.println("****Change movie rating****");
+    // get user input for movie name and search
+    System.out.println("Enter a title to search for: ");
+    String lookingFor = kb.nextLine();
+    int foundAt = Movie.search(arrayMovies, lookingFor);
+    if(foundAt >=0){
     System.out
-        .println(arrayMovies[foundAt].getMovieTitle() + " " + arrayMovies[foundAt].getGenre());
-    // choose genre
-    int returnGenre = Menu.displayMenu(Menu.genreArray);
-    arrayMovies[foundAt].setGenre(Menu.genreArray[returnGenre - 1]);
+        .println(arrayMovies[foundAt].getMovieTitle() + " " + arrayMovies[foundAt].getRating());
+    // choose rate movie
+System.out.println("Enter your rating: ");
+    String newRating = kb.nextLine();
+    newRating = validateRating(newRating);
+    arrayMovies[foundAt].setRating(newRating);
     System.out
-        .println(arrayMovies[foundAt].getMovieTitle() + " " + arrayMovies[foundAt].getGenre());
+        .println(arrayMovies[foundAt].getMovieTitle() + " rated as " + arrayMovies[foundAt].getRating());
+    } else { System.out.println("No matches found");}
+  }
+
+
+  private static String validateRating(String inRating) {
+    // TODO Auto-generated method stub
+   
+    double rating = Double.parseDouble(inRating);
+    while (rating < 0 || rating > 5){
+      System.out.println("Enter your rating: ");
+      rating = kb.nextInt();
+    }
+    String newRating = Double.toString(rating);
+    return newRating;
   }
 
 

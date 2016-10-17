@@ -19,7 +19,7 @@ public class Playlist {
   private String name;// a name for the playlist
   private int length;// the number of movies in the playlist
   private StringBuilder movies;// a list of zero or more Movie IDs which make up this playlist
-
+  private static int countPlaylists = 0;
 
   public Playlist(int playlistID, String name, int length, StringBuilder movies) {
     this.playlistID = playlistID;
@@ -97,7 +97,7 @@ public class Playlist {
       throws IOException {
     MovieApp.fileExists(inPlaylistsFile, fileName);
     Scanner inputFile = new Scanner(inPlaylistsFile);
-    int countPlaylists = 0;
+    
     String str;
 
     int playlistID; // : a unique numeric identifier for the playlist
@@ -194,5 +194,17 @@ public class Playlist {
           arrayPlaylists[i].getMovies());
     }
   }
+  
+  public static void newPlaylist(){
+   System.out.println("Enter a name for new playlist"); 
+   int playlistID = kb.nextInt();// a unique numeric identifier for the playlist
+   String name = kb.nextLine();// a name for the playlist
+   String newMovies = kb.nextLine();
+   int length = kb.nextInt();// the number of movies in the playlist
+   StringBuilder movies = new StringBuilder(newMovies);// a list of zero or more Movie IDs which make up this playlist
+   arrayPlaylists[countPlaylists+1] = new Playlist(playlistID, name, length, movies);
+   countPlaylists++;// increment count
+  }
+  
   
 }
