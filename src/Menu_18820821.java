@@ -86,7 +86,7 @@ public class Menu_18820821 {
         Movie_18820821.save();
         Playlist_18820821.save();
         
-        returnMenu = Menu_18820821.displayMenu(mainMenuArray);
+        //returnMenu = Menu_18820821.displayMenu(mainMenuArray);
         break;
       case 4: // Exit
         System.out.println("Exiting program");
@@ -101,22 +101,22 @@ public class Menu_18820821 {
     switch (returnMovieMenu) {
       case 1:
         Movie.print(Movie.arrayMovies);
-        returnMovieMenu = Menu_18820821.displayMenu(movieMenuArray);
+        //returnMovieMenu = Menu_18820821.displayMenu(movieMenuArray);
         break;
       case 2: // go to sort menu
         sortMenu();
-        returnMovieMenu = Menu_18820821.displayMenu(movieMenuArray);
+        //returnMovieMenu = Menu_18820821.displayMenu(movieMenuArray);
         break;
       case 3: // go to rate movie function
         Movie.rate();
-        returnMovieMenu = Menu_18820821.displayMenu(movieMenuArray);
+        //returnMovieMenu = Menu_18820821.displayMenu(movieMenuArray);
         break;
       case 4: // go to change movie genre function
         Movie.changeGenre();
-        returnMovieMenu = Menu_18820821.displayMenu(movieMenuArray);
+        //returnMovieMenu = Menu_18820821.displayMenu(movieMenuArray);
         break;
       case 5:
-        returnMenu = Menu_18820821.displayMenu(mainMenuArray);
+        Menu_18820821.displayMenu(mainMenuArray);
         break;
     }
   }
@@ -140,7 +140,7 @@ public class Menu_18820821 {
         break;
       case 4: // exit sub-ment
         Menu_18820821.displayMenu(mainMenuArray);
-        returnMenu = Menu_18820821.displayMenu(mainMenuArray);
+        //returnMenu = Menu_18820821.displayMenu(mainMenuArray);
         break;
     }
   }
@@ -151,15 +151,15 @@ public class Menu_18820821 {
     switch (returnSortMenu) {
       case 1: // sort by name
         Movie.sortName(Movie.arrayMovies);
-        returnSortMenu = Menu_18820821.displayMenu(sortMenuArray);
+        //returnSortMenu = Menu_18820821.displayMenu(sortMenuArray);
         break;
       case 2:// sort by genre
         Movie.sortGenre(Movie.arrayMovies);
-        returnSortMenu = Menu_18820821.displayMenu(sortMenuArray);
+        //returnSortMenu = Menu_18820821.displayMenu(sortMenuArray);
         break;
       case 3: // exit sub-menu
         Menu_18820821.displayMenu(movieMenuArray);
-        returnMovieMenu = Menu_18820821.displayMenu(movieMenuArray);
+        //returnMovieMenu = Menu_18820821.displayMenu(movieMenuArray);
         break;
     }
   }
