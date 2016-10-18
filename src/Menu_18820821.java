@@ -73,7 +73,7 @@ public class Menu_18820821 {
    */
   public static void showMenu() throws IOException {
     // Method to display and run menus
-    returnMenu = Menu_18820821.displayMenu(mainMenuArray);
+    returnMenu = displayMenu(mainMenuArray);
     switch (returnMenu) {
       case 1: // call Movie menu
         movieMenu();
@@ -85,8 +85,7 @@ public class Menu_18820821 {
         System.out.println("Saving...");
         Movie_18820821.save();
         Playlist_18820821.save();
-        
-        //returnMenu = Menu_18820821.displayMenu(mainMenuArray);
+        returnMenu = displayMenu(mainMenuArray);
         break;
       case 4: // Exit
         System.out.println("Exiting program");
@@ -95,34 +94,34 @@ public class Menu_18820821 {
   }
 
   public static void movieMenu() {
-    returnMovieMenu = Menu_18820821.displayMenu(movieMenuArray);
+    returnMovieMenu = displayMenu(movieMenuArray);
     // Object foundAt;
     // String lookingFor;
     switch (returnMovieMenu) {
       case 1:
         Movie.print(Movie.arrayMovies);
-        //returnMovieMenu = Menu_18820821.displayMenu(movieMenuArray);
+//        returnMovieMenu = displayMenu(movieMenuArray);
         break;
       case 2: // go to sort menu
         sortMenu();
-        //returnMovieMenu = Menu_18820821.displayMenu(movieMenuArray);
+//        returnMovieMenu = displayMenu(movieMenuArray);
         break;
       case 3: // go to rate movie function
         Movie.rate();
-        //returnMovieMenu = Menu_18820821.displayMenu(movieMenuArray);
+//        returnMovieMenu = displayMenu(movieMenuArray);
         break;
       case 4: // go to change movie genre function
         Movie.changeGenre();
-        //returnMovieMenu = Menu_18820821.displayMenu(movieMenuArray);
+//        returnMovieMenu = displayMenu(movieMenuArray);
         break;
       case 5:
-        Menu_18820821.displayMenu(mainMenuArray);
+       //displayMenu(mainMenuArray);
         break;
     }
   }
 
   public static void playlistMenu() {
-    returnPlaylistMenu = Menu_18820821.displayMenu(playlistMenuArray);
+    returnPlaylistMenu = displayMenu(playlistMenuArray);
     // displayMenu(playlistMenuArray);
     switch (returnPlaylistMenu) {
       case 1: // display playlists
@@ -139,27 +138,24 @@ public class Menu_18820821 {
         Playlist.print(Playlist.arrayPlaylists);
         break;
       case 4: // exit sub-ment
-        Menu_18820821.displayMenu(mainMenuArray);
-        //returnMenu = Menu_18820821.displayMenu(mainMenuArray);
+        displayMenu(mainMenuArray);
         break;
+       
     }
   }
 
   public static void sortMenu() {
     System.out.println("****Sort Movies****");
-    returnSortMenu = Menu_18820821.displayMenu(sortMenuArray);
+    returnSortMenu = displayMenu(sortMenuArray);
     switch (returnSortMenu) {
       case 1: // sort by name
         Movie.sortName(Movie.arrayMovies);
-        //returnSortMenu = Menu_18820821.displayMenu(sortMenuArray);
         break;
       case 2:// sort by genre
         Movie.sortGenre(Movie.arrayMovies);
-        //returnSortMenu = Menu_18820821.displayMenu(sortMenuArray);
         break;
       case 3: // exit sub-menu
-        Menu_18820821.displayMenu(movieMenuArray);
-        //returnMovieMenu = Menu_18820821.displayMenu(movieMenuArray);
+        movieMenu();
         break;
     }
   }
